@@ -2,7 +2,7 @@ import unittest
 from core_tic_tac_toe.board import Board
 from core_tic_tac_toe.human_player import HumanPlayer
 
-class TestPlayer(unittest.TestCase):
+class TestHumanPlayer(unittest.TestCase):
 
     def setUp(self):
         self.board = Board.build_board()

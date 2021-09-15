@@ -12,7 +12,7 @@ def board_test_script():
         result = player.get_moves()
         print(result)
     elif input.lower() == "no":
-        result = board.grid
+        result = player.get_moves()
         print(result)
     else:
         board_test_script()
