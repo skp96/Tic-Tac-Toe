@@ -35,4 +35,4 @@ jobs:
       - run:
           command: |
             pipenv install
-            pipenv run python -m unittest discover tests
+            pipenv run pytest
