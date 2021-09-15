@@ -34,7 +34,8 @@ class Board:
         if self.valid_move(row, column):
 
             for i in range(len(self.grid)):
-                grid_row, grid_col = self.grid[i]
+                grid_row = self.grid[i][0]
+                grid_col = self.grid[i][1]
 
                 if grid_row == row and grid_col == column:
                     self.grid[i] = (row, column, player_name)
