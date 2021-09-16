@@ -61,15 +61,15 @@ class TestHumanPlayer:
 
         assert result == "Invalid position"
 
-    def test_player_cannot_move_to_taken_positions(self, player, second_player):
-        player.make_move("2,3")
-        result_2 = second_player.make_move("2,3")
+    def test_player_cannot_move_to_taken_position(self, player, second_player):
+        second_player.make_move("2,3")
+        result = player.make_move("2,3")
 
-        assert result_2 == "Invalid position"
+        assert result == "Invalid position"
 
     def test_player_cannot_move_to_same_position(self, player):
         player.make_move("1,1")
-        result_1 = player.make_move("1,1")
+        result = player.make_move("1,1")
 
-        assert result_1 == "Invalid position"
+        assert result == "Invalid position"
 
