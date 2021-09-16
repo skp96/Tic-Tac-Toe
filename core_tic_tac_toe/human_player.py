@@ -11,9 +11,6 @@ class HumanPlayer:
 
         return move
 
-    def get_moves(self):
-        return self.board.retrieve_list_of_moves()
-
         
 
         

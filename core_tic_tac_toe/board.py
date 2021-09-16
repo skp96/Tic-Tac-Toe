@@ -1,13 +1,5 @@
 class Board:
 
-    # builder methods for testing
-    @classmethod
-    def build_board(cls):
-        return Board()
-
-
-
-
     def __init__(self):
         self.grid = [
             (1,1), (1,2), (1,3),
@@ -17,34 +9,37 @@ class Board:
 
     def retrieve_list_of_moves(self):
         return self.grid
+            
+    def execute_move(self, row, column, player_name):
+        if self.__valid_move(row, column):
 
-    def valid_move(self, row, column):
-        for i in range(len(self.grid)):
-            grid_row = self.grid[i][0]
-            grid_column = self.grid[i][1]
+            for grid_pos in range(len(self.grid)):
 
-            if grid_row == row and grid_column == column and len(self.grid[i]) == 2:
+                if self.__correct_position(row, column, grid_pos):
+                    self.grid[grid_pos] = (row, column, player_name)
+                    return "Success"
+        else:
+            return "Invalid position"
+            
+
+    # Private Methods
+
+    def __valid_move(self, row, column):
+        for grid_pos in range(len(self.grid)):
+
+            if self.__correct_position(row, column, grid_pos) and self.__position_not_taken(grid_pos):
                 return True
 
         return False
-            
 
-    def execute_move(self, row, column, player_name):
-        move = None
-        if self.valid_move(row, column):
+    def __correct_position(self, row, column, grid_pos):
+        grid_row = self.grid[grid_pos][0]
+        grid_col = self.grid[grid_pos][1]
 
-            for i in range(len(self.grid)):
-                grid_row = self.grid[i][0]
-                grid_col = self.grid[i][1]
+        return grid_row == row and grid_col == column
 
-                if grid_row == row and grid_col == column:
-                    self.grid[i] = (row, column, player_name)
-                    move = self.grid[i]
-                    break
-        else:
-            move = "Invalid position"
-            
-        return move
+    def __position_not_taken(self, grid_pos):
+        return len(self.grid[grid_pos]) == 2
         
             
                 
