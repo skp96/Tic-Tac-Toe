@@ -22,4 +22,6 @@ An implementation of the game Tic-Tac-Toe, built using Python
 
 ## How to run tests:
 
-- Run the command `python tests.py` 
+- Run `pipenv shell` to activate the project's virutal enviornment
+- Then run `pytest-watch` to run all tests
+- Run the command `exit` to deactivate the project's virtual enviornment
