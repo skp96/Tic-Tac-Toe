@@ -37,3 +37,6 @@ class Board:
 
     def __position_not_taken(self, grid_pos):
         return len(self.grid[grid_pos]) == 2
+
+    def __position_not_taken(self, grid_pos):
+        return len(self.grid[grid_pos]) == 2
