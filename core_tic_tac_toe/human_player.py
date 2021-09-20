@@ -1,5 +1,5 @@
 class HumanPlayer:
-    
+
     def __init__(self, name, board):
         self.name = name
         self.board = board
@@ -10,7 +10,3 @@ class HumanPlayer:
         move = self.board.execute_move(row, column, self.name)
 
         return move
-
-        
-
-        
