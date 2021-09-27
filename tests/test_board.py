@@ -30,3 +30,16 @@ class TestBoard:
         assert result_1 == "Success"
         assert result_2 == "Success"
         assert result_3 == "Success"
+
+    def test_format_board_into_readable_board(self, board):
+        result = board.board_grid()
+        expectation = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        assert result == expectation
+
+    def test_format_board_into_readable_board_after_player_move(self, board):
+        board.execute_move(1, 1, "Player 1")
+        result = board.board_grid()
+        expectation = ["Player 1", 2, 3, 4, 5, 6, 7, 8, 9]
+
+        assert result == expectation
