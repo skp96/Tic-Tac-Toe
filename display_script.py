@@ -8,9 +8,9 @@ def display_empty_board_demo_script():
     display = Display()
 
     moves = board.get_board()
-    print("Empty board as seen in Figure 1\n")
-    display.render(moves)
-    print("\n")
+    print("\nEmpty board as seen in Figure 1\n")
+    octothrope = display.print_board(moves)
+    print(octothrope)
 
 
 def display_board_with_X_at_spot_1_demo_script():
@@ -21,8 +21,8 @@ def display_board_with_X_at_spot_1_demo_script():
     player_1.make_move("1,1")
     moves = board.get_board()
     print("Board with X mark replacing spot 1, as seen in Figure 2\n")
-    display.render(moves)
-    print("\n")
+    octothrope = display.print_board(moves)
+    print(octothrope)
 
 
 def display_board_with_X_and_O_mark_demo_script():
@@ -35,8 +35,8 @@ def display_board_with_X_and_O_mark_demo_script():
     player_2.make_move("2,2")
     moves = board.get_board()
     print("Board with X mark at spot 1 and O mark at spot 5, as seen in Figure 3\n")
-    display.render(moves)
-    print("\n")
+    octothrope = display.print_board(moves)
+    print(octothrope)
 
 
 def display_board_with_X_at_all_spots_demo_script():
@@ -56,7 +56,8 @@ def display_board_with_X_at_all_spots_demo_script():
 
     moves = board.get_board()
     print("Board with X mark at all spots, as seen in Figure 4\n")
-    display.render(moves)
+    octothrope = display.print_board(moves)
+    print(octothrope)
 
 
 if __name__ == "__main__":

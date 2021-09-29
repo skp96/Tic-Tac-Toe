@@ -22,91 +22,88 @@ class TestDisplay:
     def display(self):
         return Display()
 
-    def test_can_display_board(self, capsys, display, board):
+    def test_can_display_board(self, display, board):
         moves = board.get_board()
-        display.render(moves)
-        result = capsys.readouterr()
+
+        result = display.print_board(moves)
 
         expectation = (
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(1, 2, 3) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(4, 5, 6) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(7, 8, 9) +
-            "    |    |    \n"
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(1, 2, 3) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(4, 5, 6) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(7, 8, 9) +
+            "     |     |    \n"
         )
-        assert result.out == expectation
+        assert result == expectation
 
-    def test_display_board_after_player_moves_to_pos_1(self, capsys, display, player_1, board):
+    def test_display_board_after_player_moves_to_pos_1(self, display, player_1, board):
         player_1.make_move("1,1")
         moves = board.get_board()
 
-        display.render(moves)
+        result = display.print_board(moves)
 
-        result = capsys.readouterr()
         expectation = (
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format("X", 2, 3) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(4, 5, 6) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(7, 8, 9) +
-            "    |    |    \n"
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format("X", 2, 3) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(4, 5, 6) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(7, 8, 9) +
+            "     |     |    \n"
         )
-        assert result.out == expectation
+        assert result == expectation
 
-    def test_display_board_after_both_players_move_to_different_pos(self, capsys, display, player_1, player_2, board):
+    def test_display_board_after_both_players_move_to_different_pos(self, display, player_1, player_2, board):
         player_1.make_move("1,1")
         player_2.make_move("2,2")
         moves = board.get_board()
 
-        display.render(moves)
+        result = display.print_board(moves)
 
-        result = capsys.readouterr()
         expectation = (
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format("X", 2, 3) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(4, "O", 6) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(7, 8, 9) +
-            "    |    |    \n"
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format("X", 2, 3) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(4, "O", 6) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(7, 8, 9) +
+            "     |     |    \n"
         )
-        assert result.out == expectation
+        assert result == expectation
 
-    def test_display_board_after_both_players_move_to_same_position(self, capsys, display, player_1, player_2, board):
+    def test_display_board_after_both_players_move_to_same_position(self, display, player_1, player_2, board):
         player_1.make_move("3,2")
         player_2.make_move("3,2")
         moves = board.get_board()
 
-        display.render(moves)
+        result = display.print_board(moves)
 
-        result = capsys.readouterr()
         expectation = (
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(1, 2, 3) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(4, 5, 6) +
-            "    |    |    \n" +
-            "--------------\n" +
-            "    |    |    \n" +
-            " {}  | {}  | {} \n".format(7, "X", 9) +
-            "    |    |    \n"
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(1, 2, 3) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(4, 5, 6) +
+            "     |     |    \n" +
+            "-----------------\n" +
+            "     |     |    \n" +
+            "  {}  |  {}  |  {} \n".format(7, "X", 9) +
+            "     |     |    \n"
         )
 
-        assert result.out == expectation
+        assert result == expectation
