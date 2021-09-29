@@ -11,11 +11,11 @@ class TestHumanPlayer:
 
     @pytest.fixture
     def player(self, board):
-        return HumanPlayer("Ronald Graham", board)
+        return HumanPlayer("Ronald Graham", "X", board)
 
     @pytest.fixture
     def second_player(self, board):
-        return HumanPlayer("Kanye West", board)
+        return HumanPlayer("Kanye West", "O", board)
 
     def test_player_can_move_to_first_position(self, player):
         result = player.make_move("1,1")

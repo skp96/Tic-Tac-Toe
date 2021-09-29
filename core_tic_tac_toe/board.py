@@ -21,7 +21,7 @@ class Board:
         else:
             return "Invalid position"
 
-    def board_grid(self):
+    def get_board(self):
         board_grid = []
 
         for pos in range(1, 10):
