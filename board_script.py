@@ -4,7 +4,7 @@ from core_tic_tac_toe.human_player import HumanPlayer
 
 def board_test_script():
     board = Board()
-    player = HumanPlayer("Player 1", board)
+    player = HumanPlayer("Player 1", "X", board)
 
     player.make_move("1,1")
     player.make_move("2,2")
