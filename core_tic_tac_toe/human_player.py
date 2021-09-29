@@ -1,15 +1,15 @@
 class HumanPlayer:
 
-    def __init__(self, name, mark, board):
+    def __init__(self, name, symbol, board):
         self.name = name
-        self. mark = mark
+        self.symbol = symbol
         self.board = board
 
     def get_name(self):
         return self.name
 
-    def get_mark(self):
-        return self.mark
+    def get_symbol(self):
+        return self.symbol
 
     def get_board(self):
         return self.board
@@ -18,6 +18,6 @@ class HumanPlayer:
         row, column = [int(num) for num in position.split(",")]
         board = self.get_board()
 
-        move = board.execute_move(row, column, self.get_mark())
+        move = board.execute_move(row, column, self.get_symbol())
 
         return move
