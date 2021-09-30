@@ -21,6 +21,19 @@ class Board:
         else:
             return "Invalid position"
 
+    def get_board(self):
+        board_grid = []
+
+        for pos in range(1, 10):
+            pos_info = self.grid[pos - 1]
+
+            if self.__position_not_taken(pos - 1):
+                board_grid.append(pos)
+            else:
+                board_grid.append(pos_info[2])
+
+        return board_grid
+
     def __valid_move(self, row, column):
         for grid_pos in range(len(self.grid)):
 
@@ -34,9 +47,6 @@ class Board:
         grid_col = self.grid[grid_pos][1]
 
         return grid_row == row and grid_col == column
-
-    def __position_not_taken(self, grid_pos):
-        return len(self.grid[grid_pos]) == 2
 
     def __position_not_taken(self, grid_pos):
         return len(self.grid[grid_pos]) == 2
