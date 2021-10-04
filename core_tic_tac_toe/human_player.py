@@ -1,9 +1,10 @@
 class HumanPlayer:
 
-    def __init__(self, name, symbol, board):
+    def __init__(self, name, symbol, board, io):
         self.name = name
         self.symbol = symbol
         self.board = board
+        self.io = io
 
     def get_name(self):
         return self.name
@@ -14,10 +15,11 @@ class HumanPlayer:
     def get_board(self):
         return self.board
 
-    def make_move(self, position):
-        row, column = [int(num) for num in position.split(",")]
-        board = self.get_board()
+    def make_move(self):
+        player_input = int(self.io.get_player_input()) - 1
 
-        move = board.execute_move(row, column, self.get_symbol())
-
-        return move
+        if self.board.valid_move(player_input):
+            self.board.execute_move(player_input, self.get_symbol())
+        else:
+            self.io.print_message("Invalid position, please try again!")
+            self.make_move()

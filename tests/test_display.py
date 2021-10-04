@@ -2,21 +2,16 @@ import pytest
 from core_tic_tac_toe.human_player import HumanPlayer
 from core_tic_tac_toe.board import Board
 from core_tic_tac_toe.display import Display
+from .mock_io import MockIo
 
 
 class TestDisplay:
 
+    mockIo = MockIo(["1", "2", "5", "8", "8"])
+
     @pytest.fixture
     def board(self):
         return Board()
-
-    @pytest.fixture
-    def player_1(self, board):
-        return HumanPlayer("Player 1", "X", board)
-
-    @pytest.fixture
-    def player_2(self, board):
-        return HumanPlayer("Player 2", "O", board)
 
     @pytest.fixture
     def display(self):
@@ -42,8 +37,10 @@ class TestDisplay:
         )
         assert result == expectation
 
-    def test_display_board_after_player_moves_to_pos_1(self, display, player_1, board):
-        player_1.make_move("1,1")
+    def test_display_board_after_player_moves_to_pos_1(self, display, board):
+        mockIo = MockIo(["1"])
+        player_1 = HumanPlayer("Player 1", "X", board, mockIo)
+        player_1.make_move()
         moves = board.get_board()
 
         result = display.print_board(moves)
@@ -63,9 +60,13 @@ class TestDisplay:
         )
         assert result == expectation
 
-    def test_display_board_after_both_players_move_to_different_pos(self, display, player_1, player_2, board):
-        player_1.make_move("1,1")
-        player_2.make_move("2,2")
+    def test_display_board_after_both_players_move_to_different_pos(self, display, board):
+        mockIo = MockIo(["1", "5"])
+        player_1 = HumanPlayer("Player 1", "X", board, mockIo)
+        player_1.make_move()
+
+        player_2 = HumanPlayer("Player 2", "O", board, mockIo)
+        player_2.make_move()
         moves = board.get_board()
 
         result = display.print_board(moves)
@@ -85,16 +86,20 @@ class TestDisplay:
         )
         assert result == expectation
 
-    def test_display_board_after_both_players_move_to_same_position(self, display, player_1, player_2, board):
-        player_1.make_move("3,2")
-        player_2.make_move("3,2")
+    def test_display_board_after_both_players_move_to_same_position(self, display, board):
+        mockIo = MockIo(["8", "8", "1"])
+        player_1 = HumanPlayer("Player 1", "X", board, mockIo)
+        player_1.make_move()
+
+        player_2 = HumanPlayer("Player 2", "O", board, mockIo)
+        player_2.make_move()
         moves = board.get_board()
 
         result = display.print_board(moves)
 
         expectation = (
             "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(1, 2, 3) +
+            "  {}  |  {}  |  {} \n".format("O", 2, 3) +
             "     |     |    \n" +
             "-----------------\n" +
             "     |     |    \n" +
