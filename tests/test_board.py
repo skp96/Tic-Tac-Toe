@@ -17,19 +17,36 @@ class TestBoard:
         ]
         assert result == expectation
 
-    def test_board_can_execute_move_to_first_position(self, board):
-        result = board.execute_move(1, 1, "Ronald Graham")
+    def test_get_position(self, board):
+        result = board.get_position(0)
+        expectation = (1, 1)
 
-        assert result == "Success"
+        assert result == expectation
+
+    def test_board_can_execute_move_to_first_position(self, board):
+        input = 0
+        board.execute_move(input, "Ronald Graham")
+
+        result = board.get_position(input)
+
+        assert len(result) == 3
 
     def test_board_can_execute_move_to_multiple_positions(self, board):
-        result_1 = board.execute_move(1, 1, "Ronald Graham")
-        result_2 = board.execute_move(3, 2, "Ronald Graham")
-        result_3 = board.execute_move(2, 2, "Ronald Graham")
+        input_1 = 0
+        board.execute_move(input_1, "Ronald Graham")
+        result_1 = board.get_position(input_1)
 
-        assert result_1 == "Success"
-        assert result_2 == "Success"
-        assert result_3 == "Success"
+        input_2 = 7
+        board.execute_move(input_2, "Ronald Graham")
+        result_2 = board.get_position(input_2)
+
+        input_3 = 4
+        board.execute_move(input_3, "Ronald Graham")
+        result_3 = board.get_position(input_3)
+
+        assert len(result_1) == 3
+        assert len(result_2) == 3
+        assert len(result_3) == 3
 
     def test_can_get_readable_board(self, board):
         result = board.get_board()
@@ -38,7 +55,7 @@ class TestBoard:
         assert result == expectation
 
     def test_can_readable_board_include_symbol_after_move(self, board):
-        board.execute_move(1, 1, "X")
+        board.execute_move(0, "X")
 
         result = board.get_board()
         expectation = ["X", 2, 3, 4, 5, 6, 7, 8, 9]
@@ -46,8 +63,8 @@ class TestBoard:
         assert result == expectation
 
     def test_can_readable_board_include_two_different_symbols_after_moves(self, board):
-        board.execute_move(1, 1, "X")
-        board.execute_move(2, 2, "O")
+        board.execute_move(0, "X")
+        board.execute_move(4, "O")
 
         result = board.get_board()
         expectation = ["X", 2, 3, 4, "O", 6, 7, 8, 9]
@@ -55,14 +72,29 @@ class TestBoard:
         assert result == expectation
 
     def test_can_readable_board_include_symbols_at_all_positions(self, board):
-        for x in range(1, 4):
-            for y in range(1, 4):
-                if y % 2 == 0:
-                    board.execute_move(x, y, "O")
-                else:
-                    board.execute_move(x, y, "X")
+        for pos in range(0, 9):
+            if pos % 2 == 0:
+                board.execute_move(pos, "X")
+            else:
+                board.execute_move(pos, "O")
 
         result = board.get_board()
-        expectation = ["X", "O", "X", "X", "O", "X", "X", "O", "X"]
+        expectation = ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
 
         assert result == expectation
+
+    def test_for_valid_moves_valid_move_equals_true(self, board):
+        result_1 = board.valid_move(0)
+        result_2 = board.valid_move(5)
+        result_3 = board.valid_move(8)
+
+        assert result_1 == True
+        assert result_2 == True
+        assert result_3 == True
+
+    def test_for_invalid_moves_valid_move_equals_false(self, board):
+        result_1 = board.valid_move(-1)
+        result_2 = board.valid_move(9)
+
+        assert result_1 == False
+        assert result_2 == False
