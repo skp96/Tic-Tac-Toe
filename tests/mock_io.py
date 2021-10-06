@@ -8,3 +8,6 @@ class MockIo:
 
     def print_message(self, message):
         self.message = message
+
+    def is_empty(self):
+        return len(self.player_inputs) == 0
