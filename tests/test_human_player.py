@@ -33,8 +33,8 @@ class TestHumanPlayer:
         position_data_3 = player.board.get_position(2)
 
         assert position_data[2] == "X"
-        assert position_data[2] == "X"
-        assert position_data[2] == "X"
+        assert position_data_2[2] == "X"
+        assert position_data_3[2] == "X"
 
     def test_player_cannot_move_to_invalid_position_0(self, board):
         mockIo = MockIo([0, 1])
