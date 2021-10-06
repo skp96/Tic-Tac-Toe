@@ -1,4 +1,8 @@
 class Display:
+
+    def __init__(self, io):
+        self.io = io
+
     def print_board(self, moves):
         horizontal_bar = self.__horizontal_bar()
         vertical_bars = self.__vertical_bars()
@@ -17,7 +21,13 @@ class Display:
             vertical_bars
         )
 
-        return board
+        self.io.print_message(board)
+
+    def print_invalid_move_message(self):
+        self.io.print_message("Invalid position, please try again!")
+
+    def get_player_input(self):
+        return self.io.get_player_input()
 
     def __horizontal_bar(self):
         return "-----------------\n"
