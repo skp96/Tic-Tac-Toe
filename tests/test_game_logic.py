@@ -28,7 +28,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -43,7 +43,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -58,7 +58,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -73,7 +73,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == False
 
@@ -88,7 +88,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -103,7 +103,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -118,7 +118,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -133,7 +133,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == False
 
@@ -148,7 +148,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -163,7 +163,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == True
 
@@ -178,7 +178,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_winner(grid)
+        result = game_logic.check_winner(grid)
 
         assert result == False
 

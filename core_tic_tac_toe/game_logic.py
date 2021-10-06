@@ -12,7 +12,7 @@ class GameLogic:
             [2, 4, 6]
         ]
 
-    def is_winner(self, board):
+    def check_winner(self, board):
         for combination in self.win_combinations:
             pos_1, pos_2, pos_3 = combination
 
@@ -24,7 +24,7 @@ class GameLogic:
         return False
 
     def is_tie(self, board):
-        return self.__is_board_full(board) and not self.is_winner(board)
+        return self.__is_board_full(board) and not self.check_winner(board)
 
     def __is_board_full(self, board):
 

@@ -29,6 +29,16 @@ class Display:
     def get_player_input(self):
         return self.io.get_player_input()
 
+    def print_player_turn(self, player_name):
+        self.io.print_message(f"{player_name} it's your turn!")
+
+    def announce_winner(self, player_name):
+        self.io.print_message(
+            f"We have a winner, congratulations {player_name}")
+
+    def announce_tie(self):
+        self.io.print_message(f"Good game, but it's a tie!")
+
     def __horizontal_bar(self):
         return "-----------------\n"
 

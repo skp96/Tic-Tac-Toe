@@ -124,3 +124,22 @@ class TestDisplay:
         result = display.get_player_input()
 
         assert result == "9"
+
+    def test_can_display_player_turn(self, board, display, mock_io):
+        player = HumanPlayer("Test Player", "X", board, display)
+        name = player.get_name()
+        display.print_player_turn(name)
+
+        assert mock_io.message == "Test Player it's your turn!"
+
+    def test_can_display_winner_message(self, board, display, mock_io):
+        player = HumanPlayer("Test Player", "X", board, display)
+        name = player.get_name()
+        display.announce_winner(name)
+
+        assert mock_io.message == "We have a winner, congratulations Test Player"
+
+    def announce_tie(self, display, mock_io):
+        display.announce_tie
+
+        assert mock_io.message == "Good game, but it's a tie"
