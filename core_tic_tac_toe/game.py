@@ -39,6 +39,8 @@ class Game:
 
         current_player.make_move()
 
+        self.display.clear_console()
+
     def __get_board(self):
         return self.board.get_board()
 

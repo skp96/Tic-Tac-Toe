@@ -39,6 +39,9 @@ class Display:
     def announce_tie(self):
         self.io.print_message(f"Good game, but it's a tie!")
 
+    def clear_console(self):
+        self.io.clear_console()
+
     def __horizontal_bar(self):
         return "-----------------\n"
 
