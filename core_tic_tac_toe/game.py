@@ -12,7 +12,7 @@ class Game:
         while True:
             self.__show_board()
 
-            self.__prompt_move(self.get_current_player())
+            self.__prompt_make_move(self.get_current_player())
 
             moves = self.__get_board()
 
@@ -34,10 +34,13 @@ class Game:
 
         self.display.print_board(board)
 
-    def __prompt_move(self, current_player):
+    def __prompt_make_move(self, current_player):
         self.display.print_player_turn(self.get_current_player_name())
 
         current_player.make_move()
+
+    def __get_board(self):
+        return self.board.get_board()
 
     def __is_game_over(self, moves):
         if self.game_logic.check_winner(moves):
@@ -48,11 +51,10 @@ class Game:
             self.display.announce_tie()
             return True
 
+        return False
+
     def __switch_player(self):
         if self.current_player == self.player_1:
             self.current_player = self.player_2
         else:
             self.current_player = self.player_1
-
-    def __get_board(self):
-        return self.board.get_board()
