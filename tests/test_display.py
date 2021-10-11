@@ -3,7 +3,7 @@ from core_tic_tac_toe.human_player import HumanPlayer
 from core_tic_tac_toe.board import Board
 from core_tic_tac_toe.display import Display
 from .mock_io import MockIo
-from tests import mock_io
+from core_tic_tac_toe.input_validator import InputValidator
 
 
 class TestDisplay:
@@ -19,6 +19,10 @@ class TestDisplay:
     @pytest.fixture
     def display(self, mock_io):
         return Display(mock_io)
+
+    @pytest.fixture
+    def input_validator(self):
+        return InputValidator()
 
     def test_can_display_board(self, display, board, mock_io):
         moves = board.get_board()
@@ -40,8 +44,9 @@ class TestDisplay:
         )
         assert mock_io.message == expectation
 
-    def test_display_board_after_player_moves_to_pos_1(self, display, board, mock_io):
-        player_1 = HumanPlayer("Player 1", "X", board, display)
+    def test_display_board_after_player_moves_to_pos_1(self, display, board, mock_io, input_validator):
+        player_1 = HumanPlayer("Player 1", "X", board,
+                               display, input_validator)
         player_1.make_move()
         moves = board.get_board()
 
@@ -62,11 +67,13 @@ class TestDisplay:
         )
         assert mock_io.message == expectation
 
-    def test_display_board_after_both_players_move_to_different_pos(self, display, board, mock_io):
-        player_1 = HumanPlayer("Player 1", "X", board, display)
+    def test_display_board_after_both_players_move_to_different_pos(self, display, board, mock_io, input_validator):
+        player_1 = HumanPlayer("Player 1", "X", board,
+                               display, input_validator)
         player_1.make_move()
 
-        player_2 = HumanPlayer("Player 2", "O", board, display)
+        player_2 = HumanPlayer("Player 2", "O", board,
+                               display, input_validator)
         player_2.make_move()
         moves = board.get_board()
 
@@ -87,13 +94,15 @@ class TestDisplay:
         )
         assert mock_io.message == expectation
 
-    def test_display_board_after_both_players_move_to_same_position(self, board):
+    def test_display_board_after_both_players_move_to_same_position(self, board, input_validator):
         mock_io = MockIo(["8", "8", "1"])
         display = Display(mock_io)
-        player_1 = HumanPlayer("Player 1", "X", board, display)
+        player_1 = HumanPlayer("Player 1", "X", board,
+                               display, input_validator)
         player_1.make_move()
 
-        player_2 = HumanPlayer("Player 2", "O", board, display)
+        player_2 = HumanPlayer("Player 2", "O", board,
+                               display, input_validator)
         player_2.make_move()
         moves = board.get_board()
 
@@ -125,15 +134,17 @@ class TestDisplay:
 
         assert result == "9"
 
-    def test_can_display_player_turn(self, board, display, mock_io):
-        player = HumanPlayer("Test Player", "X", board, display)
+    def test_can_display_player_turn(self, board, display, mock_io, input_validator):
+        player = HumanPlayer("Test Player", "X", board,
+                             display, input_validator)
         name = player.get_name()
         display.print_player_turn(name)
 
         assert mock_io.message == "Test Player it's your turn!"
 
-    def test_can_display_winner_message(self, board, display, mock_io):
-        player = HumanPlayer("Test Player", "X", board, display)
+    def test_can_display_winner_message(self, board, display, mock_io, input_validator):
+        player = HumanPlayer("Test Player", "X", board,
+                             display, input_validator)
         name = player.get_name()
         display.announce_winner(name)
 

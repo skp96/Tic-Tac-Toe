@@ -37,7 +37,7 @@ class Display:
             f"We have a winner, congratulations {player_name}")
 
     def announce_tie(self):
-        self.io.print_message(f"Good game, but it's a tie!")
+        self.io.print_message("Good game, but it's a tie!")
 
     def clear_console(self):
         self.io.clear_console()
