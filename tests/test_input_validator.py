@@ -51,3 +51,10 @@ class TestInputValidator:
 
         assert result_1 == False
         assert result_2 == False
+
+    def test_when_user_move_input_contains_valid_digit_expect_true(self, input_validator, board):
+        result_1 = input_validator.is_move_valid("1", board)
+        result_2 = input_validator.is_move_valid("9", board)
+
+        assert result_1 == True
+        assert result_2 == True
