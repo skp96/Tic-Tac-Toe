@@ -11,3 +11,9 @@ class MockIo:
 
     def is_empty(self):
         return len(self.player_inputs) == 0
+
+    def mock_user_input(self, input):
+        self.player_inputs.append(input)
+
+    def clear_console(self):
+        pass
