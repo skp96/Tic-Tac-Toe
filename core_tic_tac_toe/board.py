@@ -34,6 +34,14 @@ class Board:
     def valid_move(self, position):
         return self.__correct_position(position) and self.__position_not_taken(position)
 
+    def get_available_position_indicies(self):
+        board = self.get_board()
+
+        available_pos_indicies = [idx for idx,
+                                  pos in enumerate(board) if type(pos) == int]
+
+        return available_pos_indicies
+
     def __correct_position(self, grid_pos):
         return grid_pos >= 0 and grid_pos < 9
 
