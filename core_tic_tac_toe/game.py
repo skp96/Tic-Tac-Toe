@@ -14,9 +14,9 @@ class Game:
 
             self.__prompt_make_move(self.get_current_player())
 
-            moves = self.__get_board()
+            board = self.__get_board()
 
-            if self.__is_game_over(moves):
+            if self.__is_game_over(board):
                 break
             else:
                 self.__switch_player()
