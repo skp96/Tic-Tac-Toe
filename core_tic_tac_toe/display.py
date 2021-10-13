@@ -39,6 +39,12 @@ class Display:
     def announce_tie(self):
         self.io.print_message("Good game, but it's a tie!")
 
+    def welcome_message(self):
+        self.io.print_message("Welcome to Tic Tac Toe\n")
+
+    def game_options(self, message):
+        self.io.print_message(message)
+
     def clear_console(self):
         self.io.clear_console()
 
