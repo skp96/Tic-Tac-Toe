@@ -1,3 +1,4 @@
+from unittest import mock
 import pytest
 from core_tic_tac_toe.board import Board
 
@@ -98,3 +99,9 @@ class TestBoard:
 
         assert result_1 == False
         assert result_2 == False
+
+    @mock.patch("core_tic_tac_toe.board.Board.get_board", return_value=[1, 2, "X", 4, "0", 6, 7, 8, 9])
+    def test_get_available_position_indcies(self, mock_get_board, board):
+        result = board.get_available_position_indicies()
+
+        assert result == [0, 1, 3, 5, 6, 7, 8]
