@@ -48,6 +48,9 @@ class Display:
     def clear_console(self):
         self.io.clear_console()
 
+    def print_invalid_game_selection_message(self):
+        self.io.print_message("Invalid option, please try again!")
+
     def __horizontal_bar(self):
         return "-----------------\n"
 

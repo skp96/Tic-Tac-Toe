@@ -76,3 +76,8 @@ class TestInputValidator:
         result = input_validator.is_game_option_valid("1")
 
         assert result == True
+
+    def test_when_game_option_is_2_expect_true(self, input_validator):
+        result = input_validator.is_game_option_valid("2")
+
+        assert result == True

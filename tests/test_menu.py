@@ -29,34 +29,35 @@ class TestMenu:
         assert isinstance(menu.display, Display)
         assert isinstance(menu.input_validator, InputValidator)
 
-    def test_menu_should_display_option_human_v_human(self, menu, io):
-        menu.game_options()
+    def test_menu_should_display_correct_options(self, menu, io):
+        game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
+        menu.game_options(game_options)
 
         message = io.message
 
-        assert message == "1. Human vs Human"
+        assert message == "Please select from the following options:\n1. Human vs Human\n 2. Human vs Easy Computer"
 
-    def test_expect_menu_to_process_player_names_for_human_v_human(self, menu, io):
+    def test_expect_menu_to_return_selection_for_human_v_human(self, menu, io):
+        game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
         io.mock_user_input("1")
-        result = menu.game_selection()
+        result = menu.game_selection(game_options)
 
         assert result == "1"
 
+    def test_expect_menu_to_return_selection_for_computer_v_computer(self, menu, io):
+        game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
+        io.mock_user_input("2")
+        result = menu.game_selection(game_options)
+
+        assert result == "2"
+
     def test_expect_menu_to_keep_asking_for_game_selection_until_valid_input(self, menu, io):
+        game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
         io.mock_user_input("A")
         io.mock_user_input("")
         io.mock_user_input("$@")
         io.mock_user_input("1")
 
-        result = menu.game_selection()
+        result = menu.game_selection(game_options)
 
         assert result == "1"
-
-    def test_expect_menu_to_prepare_players_when_human_v_human(self, menu, io):
-        io.mock_user_input("1")
-        result = menu.prep_players()
-
-        player_1, player_2 = result
-
-        assert isinstance(player_1, HumanPlayer) == True
-        assert isinstance(player_2, HumanPlayer) == True

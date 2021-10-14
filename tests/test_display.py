@@ -150,7 +150,22 @@ class TestDisplay:
 
         assert mock_io.message == "We have a winner, congratulations Test Player"
 
-    def announce_tie(self, display, mock_io):
-        display.announce_tie
+    def test_announce_tie(self, display, mock_io):
+        display.announce_tie()
 
-        assert mock_io.message == "Good game, but it's a tie"
+        assert mock_io.message == "Good game, but it's a tie!"
+
+    def test_welcome_message(self, display, mock_io):
+        display.welcome_message()
+
+        assert mock_io.message == "Welcome to Tic Tac Toe\n"
+
+    def test_game_options(self, display, mock_io):
+        display.game_options("1. Human vs Human \n2. Human vs Easy Computer")
+
+        assert mock_io.message == "1. Human vs Human \n2. Human vs Easy Computer"
+
+    def test_print_invalid_game_selection_message(self, display, mock_io):
+        display.print_invalid_game_selection_message()
+
+        assert mock_io.message == "Invalid option, please try again!"
