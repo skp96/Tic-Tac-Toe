@@ -58,3 +58,26 @@ class TestInputValidator:
 
         assert result_1 == True
         assert result_2 == True
+
+    def test_when_game_option_is_not_digit_expect_false(self, input_validator):
+        result_1 = input_validator.is_game_option_valid("1.5")
+        result_2 = input_validator.is_game_option_valid("A")
+        result_3 = input_validator.is_game_option_valid("")
+        result_4 = input_validator.is_game_option_valid("\n")
+        result_5 = input_validator.is_game_option_valid("1.5")
+
+        assert result_1 == False
+        assert result_2 == False
+        assert result_3 == False
+        assert result_4 == False
+        assert result_5 == False
+
+    def test_when_game_option_is_1_expect_true(self, input_validator):
+        result = input_validator.is_game_option_valid("1")
+
+        assert result == True
+
+    def test_when_game_option_is_2_expect_true(self, input_validator):
+        result = input_validator.is_game_option_valid("2")
+
+        assert result == True

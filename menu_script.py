@@ -1,10 +1,10 @@
 from core_tic_tac_toe.board import Board
 from core_tic_tac_toe.display import Display
+from core_tic_tac_toe.game_config import GameConfig
 from core_tic_tac_toe.io import Io
 from core_tic_tac_toe.easy_computer_player import EasyComputerPlayer
-from core_tic_tac_toe.human_player import HumanPlayer
-from core_tic_tac_toe.game import Game
 from core_tic_tac_toe.game_logic import GameLogic
+from core_tic_tac_toe.menu import Menu
 from core_tic_tac_toe.input_validator import InputValidator
 
 if __name__ == "__main__":
@@ -13,10 +13,9 @@ if __name__ == "__main__":
     board = Board()
     game_logic = GameLogic()
     input_validator = InputValidator()
-    player_1 = HumanPlayer("Player 1", "X", board, display, input_validator)
-    player_2 = EasyComputerPlayer("Easy Computer Player", "O", board)
+    menu = Menu(display=display, input_validator=input_validator)
 
-    game = Game(display=display, board=board,
-                player_1=player_1, player_2=player_2, game_logic=game_logic)
+    game_config = GameConfig(board, display, game_logic, input_validator, menu)
 
+    game = game_config.prepare_game()
     game.start()
