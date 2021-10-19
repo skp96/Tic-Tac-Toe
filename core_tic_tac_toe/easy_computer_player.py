@@ -14,7 +14,7 @@ class EasyComputerPlayer:
         return self.player_marker
 
     def get_random_spot(self):
-        available_positions = self.board.get_available_position_indicies()
+        available_positions = self.board.get_available_positions()
 
         return choice(available_positions)
 
