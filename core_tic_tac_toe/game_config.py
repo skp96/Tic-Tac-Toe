@@ -1,4 +1,3 @@
-from core_tic_tac_toe import game_logic, medium_computer
 from .game import Game
 from .human_player import HumanPlayer
 from .easy_computer_player import EasyComputerPlayer
@@ -19,7 +18,7 @@ class GameConfig:
 
         if player_selection == "1":
             self.__prepare_human_players()
-        elif player_selection == "2":
+        if player_selection == "2":
             self.__prepare_human_and_easy_computer_players()
         if player_selection == "3":
             self.__prepare_human_and_medium_computer_players()
@@ -55,5 +54,5 @@ class GameConfig:
 
         medium_computer_opponent = self.player_1.symbol
 
-        self.player_2 = MediumComputer(name="Medium Computer", symbol="O", board=self.board,
-                                       game_logic=self.game_logic, opponent_symbol=medium_computer_opponent)
+        self.player_2 = MediumComputer(
+            name="Medium Computer", symbol="O", board=self.board, opponent_symbol=medium_computer_opponent)

@@ -16,7 +16,7 @@ class TestMediumComputer:
 
     @pytest.fixture
     def medium_computer(self, board, game_logic):
-        return MediumComputer("Medium Computer", "O", board, game_logic, "X")
+        return MediumComputer("Medium Computer", "O", board, "X")
 
     def test_when_no_win_possible_expect_check_to_win_return_none(self, medium_computer, board):
         available_positions = board.get_available_positions()

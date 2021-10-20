@@ -207,10 +207,3 @@ class TestGameLogic:
         result = game_logic.is_tie(grid)
 
         assert result == True
-
-    def test_when_win_combination_expect_is_winning_combination_return_true(self, game_logic):
-        combination = ["O", "O", "O"]
-
-        result = game_logic.is_winning_combination(combination, "O")
-
-        assert result == True

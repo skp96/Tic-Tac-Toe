@@ -1,10 +1,9 @@
 class MediumComputer:
 
-    def __init__(self, name, symbol, board, game_logic, opponent_symbol):
+    def __init__(self, name, symbol, board, opponent_symbol):
         self.__name = name
         self.__symbol = symbol
         self.__board = board
-        self.__game_logic = game_logic
         self.__opponent_symbol = opponent_symbol
 
     @property
@@ -46,12 +45,19 @@ class MediumComputer:
             for idx, value in enumerate(combination):
                 if value in available_positions:
                     combination[idx] = symbol
-                    if self.game_logic.is_winning_combination(combination, symbol):
+                    if self.is_one_move_from_winning(combination, symbol):
                         return value
                     else:
                         combination[idx] = value
 
         return None
+
+    def is_one_move_from_winning(self, combination, symbol):
+        for value in combination:
+            if value != symbol:
+                return False
+
+        return True
 
     def __get_computer_move(self, move_to_win, move_to_block, available_positions):
         if move_to_win:
