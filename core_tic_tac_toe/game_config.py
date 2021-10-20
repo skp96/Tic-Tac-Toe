@@ -1,6 +1,8 @@
-from core_tic_tac_toe.game import Game
-from core_tic_tac_toe.human_player import HumanPlayer
-from core_tic_tac_toe.easy_computer_player import EasyComputerPlayer
+from core_tic_tac_toe import game_logic, medium_computer
+from .game import Game
+from .human_player import HumanPlayer
+from .easy_computer_player import EasyComputerPlayer
+from .medium_computer import MediumComputer
 
 
 class GameConfig:
@@ -11,7 +13,7 @@ class GameConfig:
         self.game_logic = game_logic
         self.input_validator = input_validator
         self.menu = menu
-        self.game_options = "1. Human vs Human \n2. Human vs Easy Computer"
+        self.game_options = "1. Human vs Human \n2. Human vs Easy Computer\n3. Human vs Medium Computer"
 
     def prepare_players(self, player_selection):
 
@@ -19,6 +21,8 @@ class GameConfig:
             self.__prepare_human_players()
         elif player_selection == "2":
             self.__prepare_human_and_easy_computer_players()
+        if player_selection == "3":
+            self.__prepare_human_and_medium_computer_players()
 
     def prepare_game(self):
         self.display.welcome_message()
@@ -43,4 +47,13 @@ class GameConfig:
                                     display=self.display, input_validator=self.input_validator)
 
         self.player_2 = EasyComputerPlayer(
-            name="Easy Computer", player_marker="O", board=self.board)
+            name="Easy Computer", symbol="O", board=self.board)
+
+    def __prepare_human_and_medium_computer_players(self):
+        self.player_1 = HumanPlayer(name="Player 1", symbol="X", board=self.board,
+                                    display=self.display, input_validator=self.input_validator)
+
+        medium_computer_opponent = self.player_1.symbol
+
+        self.player_2 = MediumComputer(name="Medium Computer", symbol="O", board=self.board,
+                                       game_logic=self.game_logic, opponent_symbol=medium_computer_opponent)

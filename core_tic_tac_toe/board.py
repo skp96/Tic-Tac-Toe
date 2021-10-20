@@ -40,16 +40,25 @@ class Board:
     def get_available_positions(self):
         board = self.get_board()
 
-        available_pos_indicies = [idx for idx,
-                                  pos in enumerate(board) if type(pos) == int]
+        available_positions = [pos for pos in board if type(pos) == int]
 
-        return available_pos_indicies
+        return available_positions
 
     def get_all_positions(self):
-        horizontal_positions = self.__horizontal_positions()
-        vertical_positions = self.__vertical_positions()
+        board = self.get_board()
+        board_length = len(board)
+        vertical_horizontal_diagonal_length = int(math.sqrt(board_length))
 
-        return [*horizontal_positions, *vertical_positions]
+        horizontals = self.__horizontal_positions(
+            board, board_length, vertical_horizontal_diagonal_length)
+        verticals = self.__vertical_positions(
+            board, board_length, vertical_horizontal_diagonal_length)
+        left_to_right_diagonals = self.__diagonal_left_to_right(
+            board, board_length, vertical_horizontal_diagonal_length)
+        right_to_left_diagonals = self.__diagonal_right_to_left(
+            board, board_length, vertical_horizontal_diagonal_length)
+
+        return [*horizontals, *verticals, left_to_right_diagonals, right_to_left_diagonals]
 
     def __correct_position(self, grid_pos):
         return grid_pos >= 0 and grid_pos < 9
@@ -66,11 +75,7 @@ class Board:
 
         return [row, col]
 
-    def __horizontal_positions(self):
-        board = self.get_board()
-        board_length = len(board)
-        horizontal_length = int(math.sqrt(board_length))
-
+    def __horizontal_positions(self, board, board_length, horizontal_length):
         horizontal_positions = []
 
         horizontal_position = 0
@@ -81,8 +86,8 @@ class Board:
             row_end = row_start + horizontal_length
 
             for index in range(row_start, row_end):
-                position = board[index]
-                row.append(position)
+                horizontal = board[index]
+                row.append(horizontal)
 
             horizontal_positions.append(row)
 
@@ -90,11 +95,7 @@ class Board:
 
         return horizontal_positions
 
-    def __vertical_positions(self):
-        board = self.get_board()
-        board_length = len(board)
-        vertical_length = int(math.sqrt(board_length))
-
+    def __vertical_positions(self, board, board_length, vertical_length):
         vertical_positions = []
 
         for vertical_pos in range(0, vertical_length):
@@ -103,11 +104,38 @@ class Board:
             index = vertical_pos
 
             while index < board_length:
-                position = board[index]
-                column.append(position)
+                vertical = board[index]
+                column.append(vertical)
 
                 index += vertical_length
 
             vertical_positions.append(column)
 
         return vertical_positions
+
+    def __diagonal_left_to_right(self, board, board_length, row_length):
+        left_to_right_diagonals = []
+
+        diagonal_pos = 0
+
+        while diagonal_pos < board_length:
+
+            diagonal = board[diagonal_pos]
+            left_to_right_diagonals.append(diagonal)
+
+            diagonal_pos += (row_length + 1)
+
+        return left_to_right_diagonals
+
+    def __diagonal_right_to_left(self, board, board_length, row_length):
+        right_to_left_diagonals = []
+
+        diagonal_pos = 0 + row_length - 1
+
+        while diagonal_pos < board_length - 1:
+            diagonal = board[diagonal_pos]
+            right_to_left_diagonals.append(diagonal)
+
+            diagonal_pos += (row_length - 1)
+
+        return right_to_left_diagonals

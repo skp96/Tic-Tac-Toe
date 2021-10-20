@@ -26,6 +26,14 @@ class GameLogic:
     def is_tie(self, board):
         return self.__is_board_full(board) and not self.check_winner(board)
 
+    def is_winning_combination(self, combination, symbol):
+
+        for value in combination:
+            if value != symbol:
+                return False
+
+        return True
+
     def __is_board_full(self, board):
 
         for pos in board:

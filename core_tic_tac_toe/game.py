@@ -27,7 +27,7 @@ class Game:
         return self.current_player
 
     def get_current_player_name(self):
-        return self.current_player.get_name()
+        return self.current_player.name
 
     def __show_board(self):
         board = self.__get_board()
