@@ -1,7 +1,7 @@
 from .game import Game
 from .human_player import HumanPlayer
 from .easy_computer_player import EasyComputerPlayer
-from .medium_computer import MediumComputer
+from .medium_computer_player import MediumComputerPlayer
 
 
 class GameConfig:
@@ -54,5 +54,5 @@ class GameConfig:
 
         medium_computer_opponent = self.player_1.symbol
 
-        self.player_2 = MediumComputer(
+        self.player_2 = MediumComputerPlayer(
             name="Medium Computer", symbol="O", board=self.board, opponent_symbol=medium_computer_opponent)

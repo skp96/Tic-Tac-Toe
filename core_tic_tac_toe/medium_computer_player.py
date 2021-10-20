@@ -1,4 +1,4 @@
-class MediumComputer:
+class MediumComputerPlayer:
 
     def __init__(self, name, symbol, board, opponent_symbol):
         self.__name = name

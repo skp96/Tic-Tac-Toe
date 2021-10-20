@@ -1,10 +1,10 @@
 import pytest
 from core_tic_tac_toe.board import Board
-from core_tic_tac_toe.medium_computer import MediumComputer
+from core_tic_tac_toe.medium_computer_player import MediumComputerPlayer
 from core_tic_tac_toe.game_logic import GameLogic
 
 
-class TestMediumComputer:
+class TestMediumComputerPlayer:
 
     @pytest.fixture
     def board(self):
@@ -16,7 +16,7 @@ class TestMediumComputer:
 
     @pytest.fixture
     def medium_computer(self, board, game_logic):
-        return MediumComputer("Medium Computer", "O", board, "X")
+        return MediumComputerPlayer("Medium Computer", "O", board, "X")
 
     def test_when_no_win_possible_expect_check_to_win_return_none(self, medium_computer, board):
         available_positions = board.get_available_positions()

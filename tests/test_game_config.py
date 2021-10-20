@@ -9,7 +9,7 @@ from core_tic_tac_toe.human_player import HumanPlayer
 from core_tic_tac_toe.menu import Menu
 from core_tic_tac_toe.game import Game
 from core_tic_tac_toe.easy_computer_player import EasyComputerPlayer
-from core_tic_tac_toe.medium_computer import MediumComputer
+from core_tic_tac_toe.medium_computer_player import MediumComputerPlayer
 
 
 class TestGameConfig:
@@ -78,4 +78,4 @@ class TestGameConfig:
         game_config.prepare_players("3")
 
         assert isinstance(game_config.player_1, HumanPlayer)
-        assert isinstance(game_config.player_2, MediumComputer)
+        assert isinstance(game_config.player_2, MediumComputerPlayer)
