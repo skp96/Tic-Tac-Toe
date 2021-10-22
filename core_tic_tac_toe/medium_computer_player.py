@@ -19,10 +19,6 @@ class MediumComputerPlayer:
         return self.__name
 
     @property
-    def game_logic(self):
-        return self.__game_logic
-
-    @property
     def opponent_symbol(self):
         return self.__opponent_symbol
 
@@ -75,3 +71,5 @@ class MediumComputerPlayer:
 
         if move_to_block:
             return move_to_block
+
+        return None
