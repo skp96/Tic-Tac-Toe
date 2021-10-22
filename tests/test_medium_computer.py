@@ -65,7 +65,6 @@ class TestMediumComputerPlayer:
         medium_computer.make_move()
 
         ttt_board = board.get_board()
-        print(ttt_board)
 
         assert ttt_board[2] == "O"
 
