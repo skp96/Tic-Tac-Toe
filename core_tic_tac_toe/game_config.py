@@ -18,9 +18,9 @@ class GameConfig:
 
         if player_selection == "1":
             self.__prepare_human_players()
-        if player_selection == "2":
+        elif player_selection == "2":
             self.__prepare_human_and_easy_computer_players()
-        if player_selection == "3":
+        elif player_selection == "3":
             self.__prepare_human_and_medium_computer_players()
 
     def prepare_game(self):
