@@ -137,7 +137,7 @@ class TestDisplay:
     def test_can_display_player_turn(self, board, display, mock_io, input_validator):
         player = HumanPlayer("Test Player", "X", board,
                              display, input_validator)
-        name = player.get_name()
+        name = player.name
         display.print_player_turn(name)
 
         assert mock_io.message == "Test Player it's your turn!"
@@ -145,7 +145,7 @@ class TestDisplay:
     def test_can_display_winner_message(self, board, display, mock_io, input_validator):
         player = HumanPlayer("Test Player", "X", board,
                              display, input_validator)
-        name = player.get_name()
+        name = player.name
         display.announce_winner(name)
 
         assert mock_io.message == "We have a winner, congratulations Test Player"

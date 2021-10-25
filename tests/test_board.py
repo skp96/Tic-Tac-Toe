@@ -102,6 +102,14 @@ class TestBoard:
 
     @mock.patch("core_tic_tac_toe.board.Board.get_board", return_value=[1, 2, "X", 4, "0", 6, 7, 8, 9])
     def test_get_available_position_indcies(self, mock_get_board, board):
-        result = board.get_available_position_indicies()
+        result = board.get_available_positions()
 
-        assert result == [0, 1, 3, 5, 6, 7, 8]
+        assert result == [1, 2, 4, 6, 7, 8, 9]
+
+    def test_get_horizontals_verticals_and_diagonals(self, board):
+        horizontals_verticals_diagonals = [[1, 2, 3], [4, 5, 6], [
+            7, 8, 9], [1, 4, 7, ], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+
+        result = board.get_all_positions()
+
+        assert result == horizontals_verticals_diagonals
