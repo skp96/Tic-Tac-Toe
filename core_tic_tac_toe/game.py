@@ -45,11 +45,11 @@ class Game:
         return self.board.get_board()
 
     def __is_game_over(self, moves):
-        if self.game_logic.check_winner(moves):
+        if self.game_logic.check_winner(moves, self.current_player.symbol):
             self.display.announce_winner(self.get_current_player_name())
             return True
 
-        if self.game_logic.is_tie(moves):
+        if self.game_logic.is_tie(moves, self.current_player.symbol):
             self.display.announce_tie()
             return True
 

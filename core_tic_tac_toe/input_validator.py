@@ -11,7 +11,14 @@ class InputValidator:
             return False
 
     def is_game_option_valid(self, game_option):
-        return game_option.isdigit() and (game_option == "1" or game_option == "2" or game_option == "3")
+        if game_option.isdigit():
+            option = int(game_option)
+            return self.__check_range_of_options(option)
+        else:
+            return False
+
+    def __check_range_of_options(self, game_option):
+        return game_option >= 1 and game_option <= 4
 
     def __contains_invalid_character(self, input_move):
         return self.__is_alpha(input_move) or self.__is_white_space(input_move) or self.__is_special_character(input_move) or self.__contains_space(input_move) or self.__is_empty_space(input_move)
