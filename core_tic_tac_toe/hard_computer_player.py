@@ -57,21 +57,27 @@ class HardComputerPlayer:
         elif len(available_moves) == 0:
             return 0
 
+        current_player_symbol = self.__get_current_player(is_maximizer)
+        best_score = None
+        for move in available_moves:
+            self.board.execute_move(move - 1, current_player_symbol)
+            score = self.minimax(depth + 1, not is_maximizer)
+            self.board.undo_execution(move)
+
+            best_score = self.__get_score(best_score, score, is_maximizer)
+
+        return best_score
+
+    def __get_current_player(self, is_maximizer):
         if is_maximizer:
-            best_score = -math.inf
-            for move in available_moves:
-                self.board.execute_move(move - 1, self.symbol)
-                score = self.minimax(depth+1, False)
-                self.board.undo_execution(move)
-                best_score = max(score, best_score)
-
-            return best_score
+            return self.symbol
         else:
-            best_score = math.inf
-            for move in available_moves:
-                self.board.execute_move(move - 1, self.opponent_symbol)
-                score = self.minimax(depth+1, True)
-                self.board.undo_execution(move)
-                best_score = min(score, best_score)
+            return self.opponent_symbol
 
-            return best_score
+    def __get_score(self, best_score, score, is_maximizer):
+        if best_score is None:
+            return score
+        elif is_maximizer:
+            return max(best_score, score)
+        else:
+            return min(best_score, score)
