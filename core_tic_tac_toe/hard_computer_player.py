@@ -1,29 +1,16 @@
 import math
+from core_tic_tac_toe.player import Player
 
 
-class HardComputerPlayer:
+class HardComputerPlayer(Player):
     def __init__(self, name, symbol, opponent_symbol, board, game_logic):
-        self.__name = name
-        self.__symbol = symbol
+        super().__init__(name=name, symbol=symbol, board=board)
         self.__opponent_symbol = opponent_symbol
-        self.__board = board
         self.__game_logic = game_logic
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def symbol(self):
-        return self.__symbol
 
     @property
     def opponent_symbol(self):
         return self.__opponent_symbol
-
-    @property
-    def board(self):
-        return self.__board
 
     @property
     def game_logic(self):

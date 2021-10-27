@@ -1,22 +1,11 @@
-class MediumComputerPlayer:
+from core_tic_tac_toe.player import Player
+
+
+class MediumComputerPlayer(Player):
 
     def __init__(self, name, symbol, board, opponent_symbol):
-        self.__name = name
-        self.__symbol = symbol
-        self.__board = board
+        super().__init__(name=name, symbol=symbol, board=board)
         self.__opponent_symbol = opponent_symbol
-
-    @property
-    def symbol(self):
-        return self.__symbol
-
-    @property
-    def board(self):
-        return self.__board
-
-    @property
-    def name(self):
-        return self.__name
 
     @property
     def opponent_symbol(self):

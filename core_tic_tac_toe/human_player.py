@@ -1,19 +1,12 @@
-class HumanPlayer:
+from core_tic_tac_toe.player import Player
+
+
+class HumanPlayer(Player):
 
     def __init__(self, name, symbol, board, display, input_validator):
-        self.__name = name
-        self.__symbol = symbol
-        self.board = board
+        super().__init__(name=name, symbol=symbol, board=board)
         self.display = display
         self.input_validator = input_validator
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def symbol(self):
-        return self.__symbol
 
     def make_move(self):
         input = self.display.get_player_input()
