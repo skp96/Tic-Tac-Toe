@@ -87,7 +87,22 @@ class TestInputValidator:
 
         assert result == True
 
-    def test_when_game_option_is_3_expect_true(self, input_validator):
+    def test_when_game_option_is_4_expect_true(self, input_validator):
         result = input_validator.is_game_option_valid("4")
 
         assert result == True
+
+    def test_when_board_size_is_3_to_9_expect_true(self, input_validator):
+        for value in "3456789":
+            result = input_validator.is_board_size_valid(value)
+
+            assert result == True
+
+    def test_when_board_size_is_invalid_expect_false(self, input_validator):
+        result_1 = input_validator.is_board_size_valid("0")
+        result_2 = input_validator.is_board_size_valid("2")
+        result_3 = input_validator.is_board_size_valid("% ")
+
+        assert result_1 == False
+        assert result_2 == False
+        assert result_3 == False

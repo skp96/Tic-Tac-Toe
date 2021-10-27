@@ -3,7 +3,7 @@ import math
 
 class Board:
 
-    def __init__(self):
+    def __init__(self, size=3):
         self.__grid = [
             (1, 1), (1, 2), (1, 3),
             (2, 1), (2, 2), (2, 3),
