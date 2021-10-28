@@ -113,3 +113,12 @@ class TestBoard:
         result = board.get_all_positions()
 
         assert result == horizontals_verticals_diagonals
+
+    def test_undo_move_execution(self, board):
+        board.execute_move(0, "X")
+        executed_postion = board.get_position(0)
+
+        board.undo_execution(1)
+        original_position = board.get_position(0)
+
+        assert len(original_position) != len(executed_postion)

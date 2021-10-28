@@ -33,7 +33,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -48,7 +48,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -63,7 +63,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -78,7 +78,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == False
 
@@ -93,7 +93,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -108,7 +108,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -123,7 +123,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -138,7 +138,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == False
 
@@ -153,7 +153,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -168,7 +168,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == True
 
@@ -183,7 +183,7 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.check_winner(grid)
+        result = game_logic.check_winner(grid, player.symbol)
 
         assert result == False
 
@@ -204,6 +204,6 @@ class TestGameLogic:
 
         grid = board.get_board()
 
-        result = game_logic.is_tie(grid)
+        result = game_logic.is_tie(grid, player_x.symbol)
 
         assert result == True

@@ -1,19 +1,11 @@
 from random import choice
 
+from core_tic_tac_toe.player import Player
 
-class EasyComputerPlayer:
+
+class EasyComputerPlayer(Player):
     def __init__(self, name, symbol, board):
-        self.__name = name
-        self.__symbol = symbol
-        self.board = board
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def symbol(self):
-        return self.__symbol
+        super().__init__(name=name, symbol=symbol, board=board)
 
     def get_random_spot(self):
         available_positions = self.board.get_available_positions()

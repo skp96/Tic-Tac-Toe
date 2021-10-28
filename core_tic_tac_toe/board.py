@@ -4,11 +4,19 @@ import math
 class Board:
 
     def __init__(self):
-        self.grid = [
+        self.__grid = [
             (1, 1), (1, 2), (1, 3),
             (2, 1), (2, 2), (2, 3),
             (3, 1), (3, 2), (3, 3)
         ]
+
+    @property
+    def grid(self):
+        return self.__grid
+
+    @grid.setter
+    def grid(self, new_grid):
+        self.__grid = new_grid
 
     def retrieve_list_of_moves(self):
         return self.grid
@@ -20,6 +28,12 @@ class Board:
         row, col = self.__get_position_data(position)
 
         self.grid[position] = (row, col, player_symbol)
+
+    def undo_execution(self, position):
+        index = position - 1
+        row, col, player_symbol = self.get_position(index)
+
+        self.grid[index] = (row, col)
 
     def get_board(self):
         board_grid = []
