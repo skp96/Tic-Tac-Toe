@@ -3,12 +3,13 @@ import math
 
 class Board:
 
-    def __init__(self):
-        self.__grid = [
-            (1, 1), (1, 2), (1, 3),
-            (2, 1), (2, 2), (2, 3),
-            (3, 1), (3, 2), (3, 3)
-        ]
+    def __init__(self, size=3):
+        self.__length = size * size
+        self.__grid = self.__generate_grid(size)
+
+    @property
+    def length(self):
+        return self.__length
 
     @property
     def grid(self):
@@ -21,24 +22,25 @@ class Board:
     def retrieve_list_of_moves(self):
         return self.grid
 
-    def get_position(self, index):
+    def get_position(self, position):
+        index = int(position) - 1
         return self.grid[index]
 
     def execute_move(self, position, player_symbol):
-        row, col = self.__get_position_data(position)
+        index = int(position) - 1
+        row, col = self.__get_position_data(index)
 
-        self.grid[position] = (row, col, player_symbol)
+        self.grid[index] = (row, col, player_symbol)
 
-    def undo_execution(self, position):
+    def undo_move(self, position):
         index = position - 1
-        row, col, player_symbol = self.get_position(index)
+        row, col, player_symbol = self.get_position(position)
 
         self.grid[index] = (row, col)
 
     def get_board(self):
         board_grid = []
-
-        for pos in range(1, 10):
+        for pos in range(1, self.length + 1):
             pos_info = self.grid[pos - 1]
 
             if self.__position_not_taken(pos - 1):
@@ -49,7 +51,8 @@ class Board:
         return board_grid
 
     def valid_move(self, position):
-        return self.__correct_position(position) and self.__position_not_taken(position)
+        index = int(position) - 1
+        return self.__correct_position(index) and self.__position_not_taken(index)
 
     def get_available_positions(self):
         board = self.get_board()
@@ -75,7 +78,7 @@ class Board:
         return [*horizontals, *verticals, left_to_right_diagonals, right_to_left_diagonals]
 
     def __correct_position(self, grid_pos):
-        return grid_pos >= 0 and grid_pos < 9
+        return grid_pos >= 0 and grid_pos < self.__length
 
     def __position_not_taken(self, grid_pos):
         try:
@@ -153,3 +156,13 @@ class Board:
             diagonal_pos += (row_length - 1)
 
         return right_to_left_diagonals
+
+    def __generate_grid(self, size):
+        board = []
+
+        for row in range(1, size + 1):
+            for col in range(1, size + 1):
+                coordinates = (row, col)
+                board.append(coordinates)
+
+        return board
