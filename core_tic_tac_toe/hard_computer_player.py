@@ -25,7 +25,7 @@ class HardComputerPlayer(Player):
         for move in available_moves:
             self.board.execute_move(move - 1, self.symbol)
             score = self.minimax(0, False)
-            self.board.undo_execution(move)
+            self.board.undo_move(move)
 
             if score > best_score:
                 best_score = score
@@ -49,7 +49,7 @@ class HardComputerPlayer(Player):
         for move in available_moves:
             self.board.execute_move(move - 1, current_player_symbol)
             score = self.minimax(depth + 1, not is_maximizer)
-            self.board.undo_execution(move)
+            self.board.undo_move(move)
 
             best_score = self.__get_score(best_score, score, is_maximizer)
 
