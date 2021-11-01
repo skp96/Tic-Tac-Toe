@@ -37,16 +37,16 @@ class TestHardComputerPlayer:
 
     def test_will_block_opponent_from_winning(self, board, hard_computer_player):
         board.grid = [
-            (1, 1, "X"), (1, 2, "X"), (1, 3),
-            (2, 1, "O"), (2, 2), (2, 3),
+            (1, 1, "X"), (1, 2, "O"), (1, 3),
+            (2, 1), (2, 2, "X"), (2, 3),
             (3, 1), (3, 2), (3, 3)
         ]
         hard_computer_player.make_move()
 
         expectation = [
-            (1, 1, "X"), (1, 2, "X"), (1, 3, "O"),
-            (2, 1, "O"), (2, 2), (2, 3),
-            (3, 1), (3, 2), (3, 3)
+            (1, 1, "X"), (1, 2, "O"), (1, 3),
+            (2, 1), (2, 2, "X"), (2, 3),
+            (3, 1), (3, 2), (3, 3, "O")
         ]
 
         assert board.grid == expectation

@@ -59,8 +59,8 @@ class TestMediumComputerPlayer:
         assert result == 8
 
     def test_when_win_possible_expect_make_move_to_mark_winning_position(self, medium_computer, board):
-        board.execute_move(0, "O")
         board.execute_move(1, "O")
+        board.execute_move(2, "O")
 
         medium_computer.make_move()
 
@@ -69,8 +69,8 @@ class TestMediumComputerPlayer:
         assert ttt_board[2] == "O"
 
     def test_when_oppnent_win_possible_expect_make_move_to_block_position(self, medium_computer, board):
-        board.execute_move(0, "X")
         board.execute_move(1, "X")
+        board.execute_move(2, "X")
 
         medium_computer.make_move()
 

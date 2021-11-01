@@ -21,7 +21,7 @@ class MediumComputerPlayer(Player):
         computer_move = self.__get_computer_move(
             move_to_win_or_block, available_positions)
 
-        self.board.execute_move(computer_move - 1, self.symbol)
+        self.board.execute_move(computer_move, self.symbol)
 
     def check_for_win(self, all_combinations, symbol, available_positions):
         for combination in all_combinations:
