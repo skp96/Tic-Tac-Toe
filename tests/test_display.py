@@ -1,3 +1,4 @@
+from unittest import mock
 import pytest
 from core_tic_tac_toe.human_player import HumanPlayer
 from core_tic_tac_toe.board import Board
@@ -10,7 +11,7 @@ class TestDisplay:
 
     @pytest.fixture(scope="class")
     def mock_io(self):
-        return MockIo(["1", "1", "5", "9"])
+        return MockIo()
 
     @pytest.fixture
     def board(self):
@@ -25,7 +26,7 @@ class TestDisplay:
         return InputValidator()
 
     def test_can_display_board(self, display, board, mock_io):
-        moves = board.get_board()
+        moves = board.horizontal_positions()
 
         display.print_board(moves)
 
@@ -47,8 +48,11 @@ class TestDisplay:
     def test_display_board_after_player_moves_to_pos_1(self, display, board, mock_io, input_validator):
         player_1 = HumanPlayer("Player 1", "X", board,
                                display, input_validator)
+
+        mock_io.mock_user_input("1")
+
         player_1.make_move()
-        moves = board.get_board()
+        moves = board.horizontal_positions()
 
         display.print_board(moves)
 
@@ -70,12 +74,16 @@ class TestDisplay:
     def test_display_board_after_both_players_move_to_different_pos(self, display, board, mock_io, input_validator):
         player_1 = HumanPlayer("Player 1", "X", board,
                                display, input_validator)
+
+        mock_io.mock_user_input("1")
         player_1.make_move()
 
         player_2 = HumanPlayer("Player 2", "O", board,
                                display, input_validator)
+
+        mock_io.mock_user_input("5")
         player_2.make_move()
-        moves = board.get_board()
+        moves = board.horizontal_positions()
 
         display.print_board(moves)
 
@@ -94,17 +102,18 @@ class TestDisplay:
         )
         assert mock_io.message == expectation
 
-    def test_display_board_after_both_players_move_to_same_position(self, board, input_validator):
-        mock_io = MockIo(["8", "8", "1"])
-        display = Display(mock_io)
+    def test_display_board_after_both_players_move_to_same_position(self, board, input_validator, display, mock_io):
         player_1 = HumanPlayer("Player 1", "X", board,
                                display, input_validator)
+        mock_io.mock_user_input("8")
         player_1.make_move()
 
         player_2 = HumanPlayer("Player 2", "O", board,
                                display, input_validator)
+        mock_io.mock_user_input("8")
+        mock_io.mock_user_input("1")
         player_2.make_move()
-        moves = board.get_board()
+        moves = board.horizontal_positions()
 
         display.print_board(moves)
 
@@ -129,7 +138,8 @@ class TestDisplay:
 
         assert mock_io.message == "Invalid position, please try again!"
 
-    def test_display_can_retreive_player_input(self, display):
+    def test_display_can_retreive_player_input(self, display, mock_io):
+        mock_io.mock_user_input("9")
         result = display.get_player_input()
 
         assert result == "9"

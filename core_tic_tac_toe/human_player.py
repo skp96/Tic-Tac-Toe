@@ -12,8 +12,7 @@ class HumanPlayer(Player):
         input = self.display.get_player_input()
 
         if self.input_validator.is_move_valid(input, self.board):
-            player_input = int(input) - 1
-            self.board.execute_move(player_input, self.symbol)
+            self.board.execute_move(input, self.symbol)
         else:
             self.display.print_invalid_move_message()
             self.make_move()

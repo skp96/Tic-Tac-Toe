@@ -145,7 +145,7 @@ class TestBoard:
         assert result == expectation
 
     def test_can_readable_board_include_symbols_at_all_positions(self, board):
-        for pos in range(0, board.length):
+        for pos in range(0, board.dimension):
             if pos % 2 == 0:
                 board.execute_move(str(pos + 1), "X")
             else:
@@ -157,7 +157,7 @@ class TestBoard:
         assert result == expectation
 
     def test_can_readable_board_include_symbols_at_all_positions_for_board_size_5(self, board_size_5):
-        for pos in range(0, board_size_5.length):
+        for pos in range(0, board_size_5.dimension):
             if pos % 2 == 0:
                 board_size_5.execute_move(str(pos + 1), "X")
             else:

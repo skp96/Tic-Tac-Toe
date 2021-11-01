@@ -30,7 +30,7 @@ class Game:
         return self.current_player.name
 
     def __show_board(self):
-        board = self.__get_board()
+        board = self.board.horizontal_positions()
 
         self.display.print_board(board)
 
@@ -42,7 +42,7 @@ class Game:
         self.display.clear_console()
 
     def __get_board(self):
-        return self.board.get_board()
+        return self.board.get_all_positions()
 
     def __is_game_over(self, moves):
         if self.game_logic.check_winner(moves, self.current_player.symbol):

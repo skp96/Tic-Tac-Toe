@@ -1,15 +1,17 @@
-import math
-
-
 class Board:
 
     def __init__(self, size=3):
-        self.__length = size * size
-        self.__grid = self.__generate_grid(size)
+        self.__size = size
+        self.__dimension = self.size * self.size
+        self.__grid = self.__generate_grid(self.size)
 
     @property
-    def length(self):
-        return self.__length
+    def size(self):
+        return int(self.__size)
+
+    @property
+    def dimension(self):
+        return self.__dimension
 
     @property
     def grid(self):
@@ -40,7 +42,7 @@ class Board:
 
     def get_board(self):
         board_grid = []
-        for pos in range(1, self.length + 1):
+        for pos in range(1, self.dimension + 1):
             pos_info = self.grid[pos - 1]
 
             if self.__position_not_taken(pos - 1):
@@ -62,37 +64,19 @@ class Board:
         return available_positions
 
     def get_all_positions(self):
-        board = self.get_board()
-        board_length = len(board)
-        vertical_horizontal_diagonal_length = int(math.sqrt(board_length))
 
-        horizontals = self.__horizontal_positions(
-            board, board_length, vertical_horizontal_diagonal_length)
-        verticals = self.__vertical_positions(
-            board, board_length, vertical_horizontal_diagonal_length)
-        left_to_right_diagonals = self.__diagonal_left_to_right(
-            board, board_length, vertical_horizontal_diagonal_length)
-        right_to_left_diagonals = self.__diagonal_right_to_left(
-            board, board_length, vertical_horizontal_diagonal_length)
+        horizontals = self.horizontal_positions()
+        verticals = self.vertical_positions()
+        left_to_right_diagonals = self.diagonal_left_to_right()
+        right_to_left_diagonals = self.diagonal_right_to_left()
 
         return [*horizontals, *verticals, left_to_right_diagonals, right_to_left_diagonals]
 
-    def __correct_position(self, grid_pos):
-        return grid_pos >= 0 and grid_pos < self.__length
+    def horizontal_positions(self):
+        board = self.get_board()
+        board_length = self.dimension
+        horizontal_length = self.size
 
-    def __position_not_taken(self, grid_pos):
-        try:
-            return len(self.grid[grid_pos]) == 2
-        except IndexError:
-            return False
-
-    def __get_position_data(self, index):
-        row = self.grid[index][0]
-        col = self.grid[index][1]
-
-        return [row, col]
-
-    def __horizontal_positions(self, board, board_length, horizontal_length):
         horizontal_positions = []
 
         horizontal_position = 0
@@ -112,7 +96,11 @@ class Board:
 
         return horizontal_positions
 
-    def __vertical_positions(self, board, board_length, vertical_length):
+    def vertical_positions(self):
+        board = self.get_board()
+        board_length = self.dimension
+        vertical_length = self.size
+
         vertical_positions = []
 
         for vertical_pos in range(0, vertical_length):
@@ -130,7 +118,11 @@ class Board:
 
         return vertical_positions
 
-    def __diagonal_left_to_right(self, board, board_length, row_length):
+    def diagonal_left_to_right(self):
+        board = self.get_board()
+        board_length = self.dimension
+        row_length = self.size
+
         left_to_right_diagonals = []
 
         diagonal_pos = 0
@@ -144,7 +136,11 @@ class Board:
 
         return left_to_right_diagonals
 
-    def __diagonal_right_to_left(self, board, board_length, row_length):
+    def diagonal_right_to_left(self):
+        board = self.get_board()
+        board_length = self.dimension
+        row_length = self.size
+
         right_to_left_diagonals = []
 
         diagonal_pos = 0 + row_length - 1
@@ -156,6 +152,21 @@ class Board:
             diagonal_pos += (row_length - 1)
 
         return right_to_left_diagonals
+
+    def __correct_position(self, grid_pos):
+        return grid_pos >= 0 and grid_pos < self.dimension
+
+    def __position_not_taken(self, grid_pos):
+        try:
+            return len(self.grid[grid_pos]) == 2
+        except IndexError:
+            return False
+
+    def __get_position_data(self, index):
+        row = self.grid[index][0]
+        col = self.grid[index][1]
+
+        return [row, col]
 
     def __generate_grid(self, size):
         board = []
