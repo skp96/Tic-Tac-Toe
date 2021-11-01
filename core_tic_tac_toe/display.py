@@ -7,19 +7,15 @@ class Display:
         horizontal_bar = self.__horizontal_bar()
         vertical_bars = self.__vertical_bars()
 
-        board = (
-            vertical_bars +
-            "  {}  |  {}  |  {} \n".format(moves[0], moves[1], moves[2]) +
-            vertical_bars +
-            horizontal_bar +
-            vertical_bars +
-            "  {}  |  {}  |  {} \n".format(moves[3], moves[4], moves[5]) +
-            vertical_bars +
-            horizontal_bar +
-            vertical_bars +
-            "  {}  |  {}  |  {} \n".format(moves[6], moves[7], moves[8]) +
-            vertical_bars
-        )
+        board = ""
+
+        for idx, move in enumerate(moves):
+            board += vertical_bars
+            board += self.__generate_rows(move)
+            board += vertical_bars
+
+            if idx != len(moves) - 1:
+                board += horizontal_bar
 
         self.io.print_message(board)
 
@@ -27,7 +23,9 @@ class Display:
         self.io.print_message("Invalid position, please try again!")
 
     def get_player_input(self):
-        return self.io.get_player_input()
+        user_move = self.io.get_player_input()
+        print(user_move)
+        return user_move
 
     def print_player_turn(self, player_name):
         self.io.print_message(f"{player_name} it's your turn!")
@@ -56,3 +54,14 @@ class Display:
 
     def __vertical_bars(self):
         return "     |     |    \n"
+
+    def __generate_rows(self, move):
+        row = ""
+
+        for idx, position in enumerate(move):
+            if idx != len(move) - 1:
+                row += "  {}  |".format(position)
+            else:
+                row += "  {} \n".format(position)
+
+        return row

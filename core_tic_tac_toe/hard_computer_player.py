@@ -23,7 +23,7 @@ class HardComputerPlayer(Player):
         available_moves = self.board.get_available_positions()
 
         for move in available_moves:
-            self.board.execute_move(move - 1, self.symbol)
+            self.board.execute_move(move, self.symbol)
             score = self.minimax(0, False)
             self.board.undo_move(move)
 
@@ -31,10 +31,10 @@ class HardComputerPlayer(Player):
                 best_score = score
                 best_move = move
 
-        self.board.execute_move(best_move - 1, self.symbol)
+        self.board.execute_move(best_move, self.symbol)
 
     def minimax(self, depth, is_maximizer):
-        board_state = self.board.get_board()
+        board_state = self.board.horizontal_positions()
         available_moves = self.board.get_available_positions()
 
         if self.game_logic.check_winner(board_state, self.symbol):
@@ -47,7 +47,7 @@ class HardComputerPlayer(Player):
         current_player_symbol = self.__get_current_player(is_maximizer)
         best_score = None
         for move in available_moves:
-            self.board.execute_move(move - 1, current_player_symbol)
+            self.board.execute_move(move, current_player_symbol)
             score = self.minimax(depth + 1, not is_maximizer)
             self.board.undo_move(move)
 

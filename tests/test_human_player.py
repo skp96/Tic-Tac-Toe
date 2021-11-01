@@ -1,3 +1,4 @@
+from unittest import mock
 import pytest
 from core_tic_tac_toe.board import Board
 from core_tic_tac_toe.human_player import HumanPlayer
@@ -10,7 +11,7 @@ class TestHumanPlayer:
 
     @pytest.fixture(scope="class")
     def mock_io(self):
-        return MockIo(["1", "1", "2", "3"])
+        return MockIo()
 
     @pytest.fixture
     def display(self, mock_io):
@@ -24,39 +25,38 @@ class TestHumanPlayer:
     def input_validator(self):
         return InputValidator()
 
-    def test_player_can_move_to_first_position(self, board, display, input_validator):
+    def test_player_can_move_to_first_position(self, board, display, input_validator, mock_io):
         player = HumanPlayer("Player_1", "X", board, display, input_validator)
-
+        mock_io.mock_user_input("1")
         player.make_move()
-        position = 1
-        position_data = player.board.get_position(position - 1)
+        position_data = player.board.get_position("1")
 
         assert position_data[2] == "X"
 
-    def test_player_can_move_to_multiple_positions(self, board, display, input_validator):
+    def test_player_can_move_to_multiple_positions(self, board, display, input_validator, mock_io):
         player = HumanPlayer("Player_1", "X", board, display, input_validator)
 
+        mock_io.mock_user_input("1")
         player.make_move()
-        position_1 = 1
-        position_data = player.board.get_position(position_1 - 1)
+        position_data = player.board.get_position("1")
 
+        mock_io.mock_user_input("4")
         player.make_move()
-        position_2 = 2
-        position_data_2 = player.board.get_position(position_2 - 1)
+        position_data_2 = player.board.get_position("4")
 
+        mock_io.mock_user_input("7")
         player.make_move()
-        position_3 = 3
-        position_data_3 = player.board.get_position(position_3 - 1)
+        position_data_3 = player.board.get_position("7")
 
         assert position_data[2] == "X"
         assert position_data_2[2] == "X"
         assert position_data_3[2] == "X"
 
-    def test_player_cannot_move_to_invalid_position_0(self, board, input_validator):
-        mock_io = MockIo(["0", "1"])
-        display = Display(mock_io)
+    def test_player_cannot_move_to_invalid_position_0(self, board, input_validator, display, mock_io):
         player = HumanPlayer("Player_1", "X", board, display, input_validator)
 
+        mock_io.mock_user_input("0")
+        mock_io.mock_user_input("1")
         player.make_move()
 
         assert mock_io.message == "Invalid position, please try again!"

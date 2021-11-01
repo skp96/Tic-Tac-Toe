@@ -4,9 +4,8 @@ import string
 class InputValidator:
 
     def is_move_valid(self, input_move, board):
-        if not self.__contains_invalid_character(input_move) and input_move.isdigit():
-            player_input = int(input_move) - 1
-            return board.valid_move(player_input)
+        if input_move.isdigit():
+            return board.valid_move(input_move)
         else:
             return False
 

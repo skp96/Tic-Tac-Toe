@@ -39,7 +39,7 @@ class TestGame:
 
         assert mock_io.message == "We have a winner, congratulations Player 1"
 
-    def test_a_player_wins_game_when_a_horizontal_position_take(self, board, game_logic, input_validator):
+    def test_a_player_wins_game_when_a_horizontal_position_taken(self, board, game_logic, input_validator):
         mock_io = MockIo(["1", "5", "3", "2", "7", "8"])
         display = Display(mock_io)
         player_1 = HumanPlayer("Player 1", "X", board,
