@@ -24,7 +24,6 @@ class Display:
 
     def get_player_input(self):
         user_move = self.io.get_player_input()
-        print(user_move)
         return user_move
 
     def print_player_turn(self, player_name):
