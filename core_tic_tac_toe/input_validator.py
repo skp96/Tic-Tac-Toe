@@ -28,21 +28,3 @@ class InputValidator:
 
     def __check_board_size_range(self, option):
         return option >= 3 and option < 10
-
-    def __contains_invalid_character(self, input_move):
-        return self.__is_alpha(input_move) or self.__is_white_space(input_move) or self.__is_special_character(input_move) or self.__contains_space(input_move) or self.__is_empty_space(input_move)
-
-    def __is_alpha(self, input_move):
-        return input_move.isalpha()
-
-    def __is_white_space(self, input_move):
-        return input_move.isspace()
-
-    def __is_special_character(self, input_move):
-        return input_move in string.punctuation
-
-    def __contains_space(self, input_move):
-        return " " in input_move
-
-    def __is_empty_space(self, input_move):
-        return input_move == ""
