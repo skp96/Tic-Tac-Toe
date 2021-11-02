@@ -22,6 +22,10 @@ class TestGameLogic:
     def input_validator(self):
         return InputValidator()
 
+    @pytest.fixture
+    def variable_board(self):
+        return Board(5)
+
     def test_player_wins_when_first_vertical_positions_taken(self, board, game_logic, input_validator):
         mockIo = MockIo(["1", "2", "3"])
         display = Display(mockIo)
@@ -228,3 +232,45 @@ class TestGameLogic:
         result = game_logic.is_tie(grid, player_x.symbol)
 
         assert result == False
+
+    def test_game_can_be_won_with_variable_board(self, variable_board, game_logic, input_validator):
+        mock_io = MockIo(["1", "2", "7", "8", "13", "14", "19", "20", "25"])
+        display = Display(mock_io)
+        player_x = HumanPlayer("Player X", "X", variable_board,
+                               display, input_validator)
+        player_o = HumanPlayer("Player O", "O", variable_board,
+                               display, input_validator)
+
+        for _ in range(0, 4):
+            player_x.make_move()
+
+            if not mock_io.is_empty():
+                player_o.make_move()
+
+        grid = variable_board.get_all_positions()
+
+        result = game_logic.check_winner(grid, player_x.symbol)
+
+        assert result == False
+
+    def test_game_can_be_tied_with_variable_board(self, variable_board, game_logic, input_validator):
+        mock_io = MockIo(["1", "2", "6", "3", "7", "4", "13", "5", "19", "25", "11", "8",
+                         "16", "21", "10", "9", "12", "14", "15", "17", "18", "20", "22", "23", "24"])
+        display = Display(mock_io)
+
+        player_x = HumanPlayer("Player X", "X", variable_board,
+                               display, input_validator)
+        player_o = HumanPlayer("Player O", "O", variable_board,
+                               display, input_validator)
+
+        for _ in range(0, 13):
+            player_x.make_move()
+
+            if not mock_io.is_empty():
+                player_o.make_move()
+
+        grid = variable_board.get_all_positions()
+
+        result = game_logic.is_tie(grid, player_x.symbol)
+
+        assert result == True
