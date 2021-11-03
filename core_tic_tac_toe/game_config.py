@@ -65,7 +65,7 @@ class GameConfig:
         self.player_1 = HumanPlayer(name="Player 1", symbol="X", board=self.board,
                                     display=self.display, input_validator=self.input_validator)
 
-        hard_computer_opponent = player_1.symbol
+        hard_computer_opponent = self.player_1.symbol
 
         self.player_2 = HardComputerPlayer(
             name="Hard Computer", symbol="O", board=self.board, opponent_symbol=hard_computer_opponent, game_logic=self.game_logic)

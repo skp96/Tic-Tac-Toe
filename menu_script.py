@@ -14,7 +14,7 @@ if __name__ == "__main__":
     input_validator = InputValidator()
     menu = Menu(display=display, input_validator=input_validator)
 
-    game_config = GameConfig(display, game_logic, input_validator, menu)
+    game_config = GameConfig(board, display, game_logic, input_validator, menu)
 
     game = game_config.prepare_game()
     game.start()
