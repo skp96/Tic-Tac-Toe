@@ -18,6 +18,10 @@ class TestDisplay:
         return Board()
 
     @pytest.fixture
+    def variable_board(self):
+        return Board(5)
+
+    @pytest.fixture
     def display(self, mock_io):
         return Display(mock_io)
 
@@ -31,17 +35,17 @@ class TestDisplay:
         display.print_board(moves)
 
         expectation = (
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(1, 2, 3) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(4, 5, 6) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(7, 8, 9) +
-            "     |     |    \n"
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(1, 2, 3) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(4, 5, 6) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(7, 8, 9) +
+            "          |          |          \n"
         )
         assert mock_io.message == expectation
 
@@ -57,17 +61,17 @@ class TestDisplay:
         display.print_board(moves)
 
         expectation = (
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format("X", 2, 3) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(4, 5, 6) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(7, 8, 9) +
-            "     |     |    \n"
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format("X", 2, 3) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(4, 5, 6) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(7, 8, 9) +
+            "          |          |          \n"
         )
         assert mock_io.message == expectation
 
@@ -88,17 +92,17 @@ class TestDisplay:
         display.print_board(moves)
 
         expectation = (
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format("X", 2, 3) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(4, "O", 6) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(7, 8, 9) +
-            "     |     |    \n"
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format("X", 2, 3) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(4, "O", 6) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(7, 8, 9) +
+            "          |          |          \n"
         )
         assert mock_io.message == expectation
 
@@ -118,17 +122,17 @@ class TestDisplay:
         display.print_board(moves)
 
         expectation = (
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format("O", 2, 3) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(4, 5, 6) +
-            "     |     |    \n" +
-            "-----------------\n" +
-            "     |     |    \n" +
-            "  {}  |  {}  |  {} \n".format(7, "X", 9) +
-            "     |     |    \n"
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format("O", 2, 3) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(4, 5, 6) +
+            "          |          |          \n" +
+            "---------------------------------\n" +
+            "          |          |          \n" +
+            "{:>6}    |{:>6}    |     {}     \n".format(7, "X", 9) +
+            "          |          |          \n"
         )
 
         assert mock_io.message == expectation
@@ -179,3 +183,32 @@ class TestDisplay:
         display.print_invalid_game_selection_message()
 
         assert mock_io.message == "Invalid option, please try again!"
+
+    def test_can_display_board_with_variable_size(self, display, variable_board, mock_io):
+        moves = variable_board.horizontal_positions()
+
+        display.print_board(moves)
+
+        expectation = (
+            "          |          |          |          |          \n" +
+            "{:>6}    |{:>6}    |{:>6}    |{:>6}    |     {}     \n".format(1, 2, 3, 4, 5) +
+            "          |          |          |          |          \n" +
+            "-------------------------------------------------------\n" +
+            "          |          |          |          |          \n" +
+            "{:>6}    |{:>6}    |{:>6}    |{:>6}    |     {}     \n".format(6, 7, 8, 9, 10) +
+            "          |          |          |          |          \n" +
+            "-------------------------------------------------------\n" +
+            "          |          |          |          |          \n" +
+            "{:>6}    |{:>6}    |{:>6}    |{:>6}    |     {}     \n".format(11, 12, 13, 14, 15) +
+            "          |          |          |          |          \n" +
+            "-------------------------------------------------------\n" +
+            "          |          |          |          |          \n" +
+            "{:>6}    |{:>6}    |{:>6}    |{:>6}    |     {}     \n".format(16, 17, 18, 19, 20) +
+            "          |          |          |          |          \n" +
+            "-------------------------------------------------------\n" +
+            "          |          |          |          |          \n" +
+            "{:>6}    |{:>6}    |{:>6}    |{:>6}    |     {}     \n".format(21, 22, 23, 24, 25) +
+            "          |          |          |          |          \n"
+        )
+
+        assert mock_io.message == expectation
