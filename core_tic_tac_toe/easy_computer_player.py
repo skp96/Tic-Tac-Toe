@@ -15,4 +15,4 @@ class EasyComputerPlayer(Player):
     def make_move(self):
         random_position = self.get_random_spot()
 
-        self.board.execute_move(random_position - 1, self.symbol)
+        self.board.execute_move(random_position, self.symbol)
