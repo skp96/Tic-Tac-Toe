@@ -65,14 +65,8 @@ class Display:
 
         for idx, position in enumerate(move):
             if idx != len(move) - 1:
-                if type(position) == int and self.__is_double_digit(position):
-                    row += "    {}    |".format(position)
-                else:
-                    row += "     {}    |".format(position)
+                row += "{:>6}    |".format(position)
             else:
                 row += "     {}     \n".format(position)
 
         return row
-
-    def __is_double_digit(self, value):
-        return value // 10 > 0
