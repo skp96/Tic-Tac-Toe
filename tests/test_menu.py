@@ -31,7 +31,7 @@ class TestMenu:
 
     def test_menu_should_display_correct_options(self, menu, io):
         game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
-        menu.game_options(game_options)
+        menu.player_game_options(game_options)
 
         message = io.message
 
@@ -40,14 +40,14 @@ class TestMenu:
     def test_expect_menu_to_return_selection_for_human_v_human(self, menu, io):
         game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
         io.mock_user_input("1")
-        result = menu.game_selection(game_options)
+        result = menu.player_game_selection(game_options)
 
         assert result == "1"
 
     def test_expect_menu_to_return_selection_for_computer_v_computer(self, menu, io):
         game_options = "1. Human vs Human\n 2. Human vs Easy Computer"
         io.mock_user_input("2")
-        result = menu.game_selection(game_options)
+        result = menu.player_game_selection(game_options)
 
         assert result == "2"
 
@@ -58,6 +58,26 @@ class TestMenu:
         io.mock_user_input("$@")
         io.mock_user_input("1")
 
-        result = menu.game_selection(game_options)
+        result = menu.player_game_selection(game_options)
 
         assert result == "1"
+
+    def test_expect_menu_to_return_valid_board_size(self, menu, io):
+        board_option = "What size board would you like to play on? Enter a value between 3 to 9 (e.g 3 will generate a 3X3 board)"
+        io.mock_user_input("4")
+
+        result = menu.board_size_selection(board_option)
+
+        assert result == "4"
+
+    def test_expect_menu_to_keep_asking_for_board_size_until_valid_input(self, menu, io):
+        board_option = "What size board would you like to play on? Enter a value between 3 to 9 (e.g 3 will generate a 3X3 board)"
+        io.mock_user_input("A")
+        io.mock_user_input("")
+        io.mock_user_input("$@")
+        io.mock_user_input("1")
+        io.mock_user_input("9")
+
+        result = menu.board_size_selection(board_option)
+
+        assert result == "9"
